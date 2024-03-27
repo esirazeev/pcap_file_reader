@@ -103,7 +103,7 @@ bool FileReader::readNextPacket(Packet& packet)
 		throw std::runtime_error("pcap::FileReader [exception]: cannot read PCAP packet header: file corrupted");
 	}
 
-	buffer_.fill(file_, packetHeader->currentLength, byte_buffer::FillingMode::truncate);
+	buffer_.overwrite(file_, packetHeader->currentLength);
 
 	readBytes_ += packetHeader->currentLength;
 	++readPackets_;
